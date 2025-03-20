@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RetroController;
 use App\Http\Controllers\TeamController;
+use App\Models\Team;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,7 +11,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $teams = Team::all();
+
+    return view('dashboard', ['teams' => $teams]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -20,7 +24,16 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
     Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
+    Route::get('/teams/show', [TeamController::class, 'show'])->name('teams.show');
+    Route::get('/search-users', [TeamController::class, 'searchUsers'])->name('search.users');
+
+    Route::get('/retro/show', [RetroController::class, 'show'])->name('retro.show');
 });
+
+
+//Route::get('/teams/create', function () {
+//    return view('welcome');
+//});
 
 
 require __DIR__.'/auth.php';

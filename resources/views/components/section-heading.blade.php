@@ -1,1 +1,1 @@
-<h3 class="text-xl my-5">{{$slot }}</h3>
+<h3 class="text-xl my-2">{{$slot }}</h3>

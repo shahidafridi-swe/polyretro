@@ -14,6 +14,10 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\File;
 class TeamController extends Controller
 {
+    public function index(){
+        $teams = Team::all();
+    }
+
     public function create()
     {
         return view('teams.create');
@@ -71,5 +75,22 @@ class TeamController extends Controller
 
         return redirect('/');
 
+    }
+
+
+    public function show()
+    {
+        return view('teams.show');
+    }
+
+    public function searchUsers(Request $request)
+    {
+        $search = $request->input('query');
+
+        $users = User::where('email', 'LIKE', "%{$search}%")
+            ->select('id', 'name', 'email')
+            ->get();
+
+        return response()->json($users);
     }
 }
