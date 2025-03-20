@@ -1,5 +1,9 @@
+@props(['with_logo' => true])
+
 <div class="grid grid-cols-14 gap-3 mt-4">
-    <x-teams.team-text-logo>bk</x-teams.team-text-logo>
+    @if($with_logo)
+        <x-teams.team-text-logo logo_size="min">bk</x-teams.team-text-logo>
+    @endif
     <div class="col-span-13 bg-gray-800/50 rounded content-center px-2 shadow-md shadow-gray-950/50 ">
         <div class="grid grid-cols-12">
             <div class="col-span-9 content-center">

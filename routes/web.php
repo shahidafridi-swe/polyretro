@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
     Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
-    Route::get('/teams/show', [TeamController::class, 'show'])->name('teams.show');
+    Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
     Route::get('/search-users', [TeamController::class, 'searchUsers'])->name('search.users');
 
     Route::get('/retro/show', [RetroController::class, 'show'])->name('retro.show');

@@ -31,8 +31,9 @@
                 <section class="in-progress mt-10">
                     <x-section-heading>Currently in progress</x-section-heading>
                     <div class="grid grid-cols-3 gap-3">
-                        <x-retro.in-progress-sprint></x-retro.in-progress-sprint>
-                        <x-retro.in-progress-sprint></x-retro.in-progress-sprint>
+                        <x-retro.sprint-card :with_logo="true"></x-retro.sprint-card>
+                        <x-retro.sprint-card :with_logo="true"></x-retro.sprint-card>
+
 
                     </div>
                 </section>
@@ -44,7 +45,7 @@
 
                     <div class="grid grid-cols-3 gap-3">
                         @foreach($teams as  $team)
-                            <a href="/teams/show"> <x-teams.team-card :team="$team"></x-teams.team-card></a>
+                            <a href="{{ route('teams.show', $team->id) }}"> <x-teams.team-card :team="$team" ></x-teams.team-card></a>
                         @endforeach
                     </div>
 

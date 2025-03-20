@@ -2,6 +2,43 @@
 @import "@fortawesome/fontawesome-free/css/all.css";
 @source "../views";
 
-@tailwind base;
-@tailwind components;
+/*@tailwind base;*/
+/*@tailwind components;*/
 @tailwind utilities;
+
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    color: white;
+    /*border: 1px solid #ccc;*/
+    /*background-color: #f1f1f1;*/
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    /*background-color: inherit;*/
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 20px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: color-mix(in oklab, var(--color-cyan-500) 10%, transparent);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: color-mix(in oklab, var(--color-cyan-500) 30%, transparent);
+
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+
+}

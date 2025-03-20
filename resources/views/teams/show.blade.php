@@ -1,47 +1,54 @@
 <x-app-layout>
 
-<section class="grid grid-cols-12 max-w-7xl mx-auto gap-1 mt-5">
-
-    <div class="p-5 bg-cyan-700/0 col-span-3">
-        <div class="">
-            <div class="flex items-center  gap-2">
-                <x-section-heading >Retrospectives</x-section-heading>
-                <x-retro.create-modal-button></x-retro.create-modal-button>
-            </div>
-            <div>
-                <a href="/retro/show">
-                    <x-retro.in-progress-sprint></x-retro.in-progress-sprint>
-                </a>
-            </div>
-        </div>
-
-
-        <div class="mt-5">
-            <div class="flex items-center  gap-2">
-                <x-section-heading>Members</x-section-heading>
-                <x-retro.create-modal-button></x-retro.create-modal-button>
-            </div>
-
-            <div class="space-y-2">
-                <x-retro.member></x-retro.member>
-                <x-retro.member></x-retro.member>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="p-5 col-span-9">
+<section class=" max-w-7xl mx-auto ">
+    <div class="flex justify-between items-center text-cyan-500/70  border-b border-b-cyan-500/30">
+        <h3 class="uppercase text-4xl font-semibold">Team {{$team->name}} </h3>
         <div>
-            <x-section-heading>Team actions</x-section-heading>
-            <div>
-                <x-action.action></x-action.action>
+            <!-- Tab links -->
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'Members')" >Members</button>
+                <button class="tablinks" onclick="openCity(event, 'Retrospectives')" id="defaultOpen">Retrospectives</button>
+                <button class="tablinks hover:bg-cyan-500/10 " onclick="openCity(event, 'Dashboard')" >Dashboard</button>
             </div>
+
+
         </div>
     </div>
+    <!-- Tab content -->
+    <div id="Dashboard" class="tabcontent">
+        <x-teams.dashboard></x-teams.dashboard>
+    </div>
+
+    <div id="Retrospectives" class="tabcontent">
+        <x-teams.retrospectives></x-teams.retrospectives>
+    </div>
+
+    <div id="Members" class="tabcontent">
+        <x-teams.members></x-teams.members>
+    </div>
+
+
+    <x-teams.add-member-modal></x-teams.add-member-modal>
+    <x-retro.create-modal></x-retro.create-modal>
 
 
 
 </section>
 
+    <script>
+        function openCity(evt, cityName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        document.getElementById("defaultOpen").click();
+    </script>
 </x-app-layout>
