@@ -17,4 +17,9 @@ class Team extends Model
     {
         return $this->hasMany(TeamMember::class);
     }
+    public function retros()
+    {
+        return $this->hasMany(Retro::class);
+    }
+
 }

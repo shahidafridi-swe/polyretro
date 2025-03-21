@@ -5,6 +5,7 @@
             <div class="flex items-center  gap-2">
 
                 <x-section-heading >Retrospectives</x-section-heading>
+                <p>({{ $retros->count() }})</p>
                 <x-retro.create-modal-button><i class="fa-solid fa-plus rounded-full p-3 hover:bg-cyan-800/30 hover:ring-2 hover:ring-cyan-800/50 text-cyan-500 transition"></i></x-retro.create-modal-button>
             </div>
             <div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TeamConfirmationMail;
+use App\Models\Retro;
 use App\Models\Team;
 use App\Models\TeamMember;
 use App\Models\User;
@@ -80,7 +81,8 @@ class TeamController extends Controller
 
     public function show(Team $team)
     {
-        return view('teams.show', compact('team'));
+        $retros = $team->retros ?? collect();
+        return view('teams.show', compact('team', 'retros'));
     }
 
     public function searchUsers(Request $request)

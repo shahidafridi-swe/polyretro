@@ -4,14 +4,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RetroController;
 use App\Http\Controllers\TeamController;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/dashboard', function () {
-    $teams = Team::all();
+Route::get('/', function () {
+    $teams = Auth::user()->teams()->get();
 
     return view('dashboard', ['teams' => $teams]);
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -28,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/search-users', [TeamController::class, 'searchUsers'])->name('search.users');
 
     Route::get('/retro/show', [RetroController::class, 'show'])->name('retro.show');
+    Route::post('/retro', [RetroController::class, 'store'])->name('retro.store');
 });
 
 

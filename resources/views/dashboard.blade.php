@@ -1,9 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+{{--    <x-slot name="header">--}}
+{{--        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">--}}
+{{--            {{ __('Dashboard') }}--}}
+{{--        </h2>--}}
+{{--    </x-slot>--}}
 
     <div class="py-12 max-w-7xl mx-auto ">
         <div class="grid grid-cols-12">
@@ -33,10 +33,9 @@
                     <div class="grid grid-cols-3 gap-3">
                         <x-retro.sprint-card :with_logo="true"></x-retro.sprint-card>
                         <x-retro.sprint-card :with_logo="true"></x-retro.sprint-card>
-
-
                     </div>
                 </section>
+
                 <section class="teams mt-10">
                     <div class="flex items-center  gap-2">
                         <x-section-heading>Your Teams</x-section-heading>
