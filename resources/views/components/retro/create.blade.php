@@ -1,5 +1,5 @@
 <div class="text-gray-300">
-    <form method="POST" action="{{ route('retro.store') }}" enctype="multipart/form-data" class="max-w-lg mx-auto  p-6 rounded-lg shadow-lg">
+    <form method="POST" action="{{ route('retro.store') }}" class="max-w-lg mx-auto  p-6 rounded-lg shadow-lg">
         @csrf
 
         <input type="hidden" name="team_id" value="{{ $team->id }}">

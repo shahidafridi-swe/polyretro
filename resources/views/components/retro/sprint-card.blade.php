@@ -1,4 +1,4 @@
-@props(['with_logo' => false])
+@props(['with_logo' => false, 'retro', 'team'])
 
 <div class="col-span-1 bg-gray-800/50 p-5 rounded hover:scale-103 transition hover:bg-gray-800 cursor-pointer">
     <div class="flex gap-2  text-gray-400">
@@ -31,11 +31,11 @@
         @endif
         <div>
             <div class="">
-                <span class="text-gray-200">Sprint 1</span>
+                <span class="text-gray-200">{{ isset($retro) ? $retro->name : 'Sprint' }}</span>
                 <span class="text-gray-200">-</span>
-                <span >MON 28 SEPTEMBER</span>
+                <span>{{ isset($retro) ? \Carbon\Carbon::parse($retro->created_at)->format('D d F Y') : 'Sprint Date' }}</span>
             </div>
-            <span class="bg-black/50 py-0.5 px-2 text-gray-300/70 rounded-xl">IN PROGRESS</span>
+            <span class="bg-black/50 py-0.5 px-2 text-gray-300/70 rounded-xl uppercase">{{ isset($retro) ? $retro->status : 'Status' }}</span>
         </div>
     </div>
 </div>

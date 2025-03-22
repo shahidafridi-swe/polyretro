@@ -7,8 +7,8 @@
             <!-- Tab links -->
             <div class="tab">
                 <button class="tablinks" onclick="openCity(event, 'Members')" >Members</button>
-                <button class="tablinks" onclick="openCity(event, 'Retrospectives')" id="defaultOpen">Retrospectives</button>
-                <button class="tablinks hover:bg-cyan-500/10 " onclick="openCity(event, 'Dashboard')" >Dashboard</button>
+                <button class="tablinks" onclick="openCity(event, 'Retrospectives')" >Retrospectives</button>
+                <button class="tablinks hover:bg-cyan-500/10 " onclick="openCity(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
             </div>
 
 

@@ -1,3 +1,5 @@
+@props(['retros', 'team'])
+
 <div class="grid grid-cols-12 gap-1">
     <div class="py-5 bg-cyan-700/0 col-span-3">
 
@@ -8,10 +10,14 @@
                 <p>({{ $retros->count() }})</p>
                 <x-retro.create-modal-button><i class="fa-solid fa-plus rounded-full p-3 hover:bg-cyan-800/30 hover:ring-2 hover:ring-cyan-800/50 text-cyan-500 transition"></i></x-retro.create-modal-button>
             </div>
-            <div>
-                <a href="/retro/show">
-                    <x-retro.sprint-card ></x-retro.sprint-card>
-                </a>
+            <div class="space-y-3" >
+
+                @foreach($retros as $retro)
+                    {{ $retro->name }}
+                    <a class="block" href="{{ route('retro.show', $retro->id) }}">
+                        <x-retro.sprint-card :retro="$retro" :team="$team"></x-retro.sprint-card>
+                    </a>
+                @endforeach
             </div>
         </div>
 

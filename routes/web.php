@@ -28,8 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
     Route::get('/search-users', [TeamController::class, 'searchUsers'])->name('search.users');
 
-    Route::get('/retro/show', [RetroController::class, 'show'])->name('retro.show');
-    Route::post('/retro', [RetroController::class, 'store'])->name('retro.store');
+    Route::get('/retros/{retro}', [RetroController::class, 'show'])->name('retro.show');
+    Route::post('/retros', [RetroController::class, 'store'])->name('retro.store');
 });
 
 

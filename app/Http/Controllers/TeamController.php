@@ -81,7 +81,7 @@ class TeamController extends Controller
 
     public function show(Team $team)
     {
-        $retros = $team->retros ?? collect();
+        $retros = $team->retros;
         return view('teams.show', compact('team', 'retros'));
     }
 

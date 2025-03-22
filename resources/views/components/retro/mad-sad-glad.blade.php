@@ -1,3 +1,5 @@
+@props(['team', 'retro'])
+
 <div class="grid grid-cols-3 gap-0.5">
     <div class="col-span-1 px-1">
         <div>
@@ -6,6 +8,19 @@
             <p class="text-gray-400/50">What is driving you crazy?</p>
         </div>
         <div class="py-2 px-1 bg-gray-800/50 rounded space-y-3">
+
+            <div>
+                <form method="POST" action="" class="max-w-lg mx-auto  p-6 rounded-lg shadow-lg">
+                    @csrf
+
+                    <input type="hidden" name="retro_id" value="{{ $retro->id }}">
+
+                    <input type="text" name="body" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                </form>
+
+            </div>
+
+
             <x-retro.mad-post></x-retro.mad-post>
             <x-retro.mad-post></x-retro.mad-post>
         </div>

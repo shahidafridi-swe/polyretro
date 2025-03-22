@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class RetroController extends Controller
 {
-    public function show()
+    public function show(Retro $retro)
     {
-        $retros = Retro::where('team_id', Auth::user()->team_id)->get();
-        return view('retro.show', compact('retros'));
+        $team = $retro->team;
+        return view('retro.show', compact('retro', 'team'));
     }
 
     public function store(Request $request)
@@ -27,7 +27,7 @@ class RetroController extends Controller
             'name' => $validated['name'],
         ]);
 
-        dd($retro);
+//        dd($retro);
 
         return redirect()->route('teams.show', $validated['team_id']); // Redirect to the team page
     }
