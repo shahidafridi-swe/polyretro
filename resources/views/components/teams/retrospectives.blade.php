@@ -12,18 +12,26 @@
                 </x-retro.create-modal-button>
             </div>
 
+            @foreach($retros as $retro)
+                <a class="block" href="{{ route('retro.show', $retro->id) }}">
+                    <x-retro.sprint-card :retro="$retro" :team="$team"></x-retro.sprint-card>
+                </a>
+            @endforeach
 
-            <x-retro.sprint-card ></x-retro.sprint-card>
-            <x-retro.sprint-card ></x-retro.sprint-card>
         </div>
     </div>
 
     <div class="mt-10">
         <x-section-heading>Closed Retrospectives</x-section-heading>
         <div class="grid grid-cols-3 gap-3 ">
-            <x-retro.sprint-card ></x-retro.sprint-card>
-            <x-retro.sprint-card ></x-retro.sprint-card>
-            <x-retro.sprint-card ></x-retro.sprint-card>
+            @foreach($retros as $retro)
+                @if($retro->status == 'complete')
+                    <a class="block" href="{{ route('retro.show', $retro->id) }}">
+                        <x-retro.sprint-card :retro="$retro" :team="$team"></x-retro.sprint-card>
+                    </a>
+                @endif
+            @endforeach
+
         </div>
     </div>
 </div>

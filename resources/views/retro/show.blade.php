@@ -3,13 +3,13 @@
 
         <div class="text-cyan-500/70 border-b border-b-cyan-500/30">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <h3 class="uppercase text-4xl font-semibold">Team {{ $team->name }} >> {{ $retro->name }} </h3>
+                <h3 class="uppercase text-4xl font-semibold">Team <a href="{{ route('teams.show', $team->id) }}" class="hover:text-cyan-300">{{ $team->name }}</a> <i class="fa-solid fa-angle-right text-cyan-200"></i> {{ $retro->name }} </h3>
                 <div>
                     <div class="tab">
                         <button
                             class="px-4 py-2 transition"
                             :class="showActions ? 'bg-cyan-900/50 text-white' : '' "
-                            @click="showActions = !showActions">
+                            @click="showActions = !showActions" >
                             Team Actions
                         </button>
                     </div>
@@ -25,14 +25,8 @@
                 </div>
 
                 {{-- Team Actions --}}
-                <div x-show="showActions" class="col-span-4 py-5 bg-gray-700/10">
-                    <div class=" text-center py-5 ">
-                        <i class="fa-solid fa-circle-check text-4xl text-gray-400 "></i>
-                        <h3 class="text-2xl text-gray-400 ">Team Actions</h3>
-                    </div>
-                    <div  class="py-5">
-                        <x-action.action :with_logo="false"></x-action.action>
-                    </div>
+                <div x-show="showActions" class="col-span-4 pt-5">
+                    <x-retro.team-actions :retro="$retro" :team="$team"></x-retro.team-actions>
                 </div>
             </div>
         </div>

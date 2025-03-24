@@ -1,4 +1,4 @@
-@props(['retros', 'team'])
+@props(['retros', 'team', 'members'])
 
 <div class="grid grid-cols-12 gap-1">
     <div class="py-5 bg-cyan-700/0 col-span-3">
@@ -13,7 +13,6 @@
             <div class="space-y-3" >
 
                 @foreach($retros as $retro)
-                    {{ $retro->name }}
                     <a class="block" href="{{ route('retro.show', $retro->id) }}">
                         <x-retro.sprint-card :retro="$retro" :team="$team"></x-retro.sprint-card>
                     </a>
@@ -31,8 +30,11 @@
             </div>
 
             <div class="space-y-2">
-                <x-retro.member></x-retro.member>
-                <x-retro.member></x-retro.member>
+                @foreach($members as $member)
+
+                    <x-retro.member :member="$member"></x-retro.member>
+
+                @endforeach
             </div>
 
         </div>

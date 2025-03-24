@@ -82,7 +82,8 @@ class TeamController extends Controller
     public function show(Team $team)
     {
         $retros = $team->retros;
-        return view('teams.show', compact('team', 'retros'));
+        $members = $team->members()->with('user')->get();
+        return view('teams.show', compact('team', 'retros', 'members'));
     }
 
     public function searchUsers(Request $request)

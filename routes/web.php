@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActionController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RetroController;
 use App\Http\Controllers\TeamController;
@@ -30,6 +32,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/retros/{retro}', [RetroController::class, 'show'])->name('retro.show');
     Route::post('/retros', [RetroController::class, 'store'])->name('retro.store');
+
+    Route::get('/mad-posts/{retro}', [PostController::class, 'getMadPosts'])->name('posts.mad.all');
+    Route::get('/sad-posts/{retro}', [PostController::class, 'getSadPosts'])->name('posts.sad.all');
+    Route::get('/glad-posts/{retro}', [PostController::class, 'getGladPosts'])->name('posts.glad.all');
+    Route::post('/posts', [PostController::class, 'storePost'])->name('posts.store');
+
+    Route::get('/actions/{retro}', [ActionController::class, 'getActions'])->name('actions');
+    Route::post('/actions', [ActionController::class, 'storeActions'])->name('actions.store');
+
+
+
 });
 
 

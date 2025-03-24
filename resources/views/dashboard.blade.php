@@ -16,7 +16,7 @@
                     @endif
                 </div>
                 <div class="mt-5 text-center ">
-                    <span class="text-xl">Shahid Afridi </span>
+                    <span class="text-xl">{{auth()->user()->name}}</span>
                     <span class="ms-2 text-cyan-500"><i class="fa-solid fa-pen "></i></span>
                 </div>
             </div>

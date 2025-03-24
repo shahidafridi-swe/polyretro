@@ -1,5 +1,5 @@
 <div class="bg-yellow-900/70 p-3 rounded relative">
-    <p class="text-gray-300">Mad action 1 2 3 </p>
+    <p x-text="post.body" class="text-gray-300"></p>
     <div class=" flex gap-x-2 absolute -bottom-1 right-2">
         <div class="flex gap-1">
             <span>2</span>

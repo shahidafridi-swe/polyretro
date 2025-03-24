@@ -4,7 +4,7 @@
     @if($with_logo)
         <x-teams.team-text-logo logo_size="min">bk</x-teams.team-text-logo>
     @endif
-    <div class=" bg-gray-800/50 rounded content-center px-2 shadow-md shadow-gray-950/50 ">
+    <div class=" bg-gray-800/50 rounded content-center px-2 shadow-md shadow-gray-950/80 ">
         <div class="grid grid-cols-12">
             <div class="col-span-9 content-center">
                 <div class="flex items-center gap-2">
@@ -12,10 +12,10 @@
                         <span class="text-3xl "><i class="fa-regular fa-circle-check rounded-full hover:text-green-500 transition  hover:shadow-xl hover:shadow-green-500/50 "></i></span>
                     </div>
                     <div class="">
-                        <p class="text-gray-200">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p x-text="action.body" class="text-gray-200"></p>
                     </div>
                     <div>
-                        <p>MON 28 SEPTEMBER</p>
+                        <p x-text="action.deadline"></p>
                     </div>
                 </div>
             </div>

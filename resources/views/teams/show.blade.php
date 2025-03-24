@@ -16,7 +16,7 @@
     </div>
     <!-- Tab content -->
     <div id="Dashboard" class="tabcontent">
-        <x-teams.dashboard :retros="$retros" :team="$team"></x-teams.dashboard>
+        <x-teams.dashboard :retros="$retros" :team="$team" :members="$members"></x-teams.dashboard>
     </div>
 
     <div id="Retrospectives" class="tabcontent">
@@ -24,7 +24,7 @@
     </div>
 
     <div id="Members" class="tabcontent">
-        <x-teams.members></x-teams.members>
+        <x-teams.members :members="$members"></x-teams.members>
     </div>
 
 

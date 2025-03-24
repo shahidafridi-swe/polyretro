@@ -18,18 +18,18 @@ class RetroController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'team_id' => 'required|exists:teams,id', // Ensures valid team_id
+            'team_id' => 'required|exists:teams,id',
         ]);
 
         $retro = Retro::create([
 
-            'team_id' => $validated['team_id'], // Use the team_id from the form
+            'team_id' => $validated['team_id'],
             'name' => $validated['name'],
         ]);
 
 //        dd($retro);
 
-        return redirect()->route('teams.show', $validated['team_id']); // Redirect to the team page
+        return redirect()->route('teams.show', $validated['team_id']);
     }
 
 
