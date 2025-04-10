@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('body');
             $table->foreignId('retro_id')->constrained()->onDelete('cascade');
             $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
-            $table->enum('status', ['in_progress', 'complete'])->default('in_progress');
+            $table->enum('status', ['in progress', 'complete'])->default('in progress');
             $table->date('deadline')->nullable();
             $table->timestamps();
         });

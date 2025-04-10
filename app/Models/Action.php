@@ -13,5 +13,13 @@ class Action extends Model
         return $this->belongsTo(Retro::class);
     }
 
-    
+    public function comments()
+    {
+        return $this->hasMany(ActionComment::class);
+    }
+
+    public function assignedUsers()
+    {
+        return $this->belongsToMany(User::class, 'action_users');
+    }
 }

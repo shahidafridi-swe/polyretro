@@ -46,6 +46,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Team::class, 'team_members');
     }
-
-
+    public function reactions()
+    {
+        return $this->hasMany(PostReaction::class);
+    }
+    public function assignedActions()
+    {
+        return $this->belongsToMany(Action::class);
+    }
 }

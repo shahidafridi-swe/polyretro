@@ -1,6 +1,6 @@
-@props(['retros', 'team', 'members'])
+@props(['retros', 'team', 'members', 'actions'])
 
-<div class="grid grid-cols-12 gap-1">
+<div x-data="team" class="grid grid-cols-12 gap-1">
     <div class="py-5 bg-cyan-700/0 col-span-3">
 
         <div class="">
@@ -43,10 +43,27 @@
 
     <div class="p-5 col-span-9">
         <div>
-            <x-section-heading>Team actions</x-section-heading>
-            <div>
-                <x-action.action></x-action.action>
+            <x-section-heading>Team actions ({{$actions->count()}})</x-section-heading>
+            <div class="space-y-3">
+                <template x-for="action in actions" :key="action.id">
+                    <button @click="openActionModal(action)" class="block w-full text-start">
+                        <x-action.action :with_logo="false"></x-action.action>
+                    </button>
+                </template>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('team', () => ({
+            showActions : false,
+
+
+            actions: @json($actions),
+
+
+        }))
+    });
+</script>

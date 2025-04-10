@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostReaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,17 +11,42 @@ class PostController extends Controller
 {
     public function getMadPosts($retroId)
     {
-        $madPosts = Post::where('type', 'mad')->where('retro_id', $retroId)->latest()->get();
+        $madPosts = Post::where('type', 'mad')
+            ->where('retro_id', $retroId)
+            ->with([
+                'author:id,name,email,color,photo',
+                'reactions.user:id,name,email,color,photo',
+                'comments.author:id,name,email,color,photo'
+            ])
+            ->latest()
+            ->get();
+
         return response()->json($madPosts);
     }
     public function getSadPosts($retroId)
     {
-        $sadPosts = Post::where('type', 'sad')->where('retro_id', $retroId)->latest()->get();
+        $sadPosts = Post::where('type', 'sad')
+            ->where('retro_id', $retroId)
+            ->with([
+                'author:id,name,email,color,photo',
+                'reactions.user:id,name,email,color,photo',
+                'comments.author:id,name,email,color,photo'
+            ])
+            ->latest()
+            ->get();;
         return response()->json($sadPosts);
     }
     public function getGladPosts($retroId)
     {
-        $gladPosts = Post::where('type', 'glad')->where('retro_id', $retroId)->latest()->get();
+        $gladPosts = Post::where('type', 'glad')
+            ->where('retro_id', $retroId)
+            ->with([
+                'author:id,name,email,color,photo',
+                'reactions.user:id,name,email,color,photo',
+                'comments.author:id,name,email,color,photo'
+            ])
+            ->latest()
+            ->get();;
         return response()->json($gladPosts);
     }
 
@@ -41,5 +67,15 @@ class PostController extends Controller
         ]);
 
         return response()->json($post);
+    }
+
+    public function updatePost(Request $request, $postId)
+    {
+        $request->validate([
+            'body' => 'required|string',
+        ]);
+        $post = Post::find($postId);
+        $post->body = $request->body;
+        $post->save();
     }
 }

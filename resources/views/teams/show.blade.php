@@ -16,11 +16,11 @@
     </div>
     <!-- Tab content -->
     <div id="Dashboard" class="tabcontent">
-        <x-teams.dashboard :retros="$retros" :team="$team" :members="$members"></x-teams.dashboard>
+        <x-teams.dashboard :retros="$retros" :team="$team" :members="$members" :actions="$actions"></x-teams.dashboard>
     </div>
 
     <div id="Retrospectives" class="tabcontent">
-        <x-teams.retrospectives :retros="$retros" :team="$team"></x-teams.retrospectives>
+        <x-teams.retrospectives :retros="$retros" :team="$team" :members="$members"></x-teams.retrospectives>
     </div>
 
     <div id="Members" class="tabcontent">

@@ -13,9 +13,11 @@
             </div>
 
             @foreach($retros as $retro)
-                <a class="block" href="{{ route('retro.show', $retro->id) }}">
-                    <x-retro.sprint-card :retro="$retro" :team="$team"></x-retro.sprint-card>
-                </a>
+                @if($retro->status == 'in progress')
+                    <a class="block" href="{{ route('retro.show', $retro->id) }}">
+                        <x-retro.sprint-card :retro="$retro" :team="$team"></x-retro.sprint-card>
+                    </a>
+                @endif
             @endforeach
 
         </div>

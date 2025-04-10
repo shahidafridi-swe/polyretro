@@ -1,11 +1,6 @@
-<x-app-layout>
-{{--    <x-slot name="header">--}}
-{{--        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">--}}
-{{--            {{ __('Dashboard') }}--}}
-{{--        </h2>--}}
-{{--    </x-slot>--}}
+<x-app-layout >
 
-    <div class="py-12 max-w-7xl mx-auto ">
+    <div x-data="dashboard" class="py-12 max-w-7xl mx-auto ">
         <div class="grid grid-cols-12">
             <div class="p-5 col-span-2">
                 <div class="">
@@ -17,22 +12,31 @@
                 </div>
                 <div class="mt-5 text-center ">
                     <span class="text-xl">{{auth()->user()->name}}</span>
-                    <span class="ms-2 text-cyan-500"><i class="fa-solid fa-pen "></i></span>
+{{--                    <span class="ms-2 text-cyan-500"><i class="fa-solid fa-pen "></i></span>--}}
                 </div>
             </div>
 
             <div class="p-1 col-span-10 mt-5">
                 <section class="actions">
-                    <x-section-heading>Your Actions</x-section-heading>
-                    <x-action></x-action>
-                    <x-action></x-action>
+                    <x-section-heading>Your Actions ({{$actions->count()}})</x-section-heading>
+                   <div class="space-y-3 mt-3">
+
+                       @foreach($actions as $action)
+                           <x-action.dashboard-action :action="$action"></x-action.dashboard-action>
+                       @endforeach
+                   </div>
+
                 </section>
 
                 <section class="in-progress mt-10">
-                    <x-section-heading>Currently in progress</x-section-heading>
+                    <x-section-heading>Currently in progress ({{$retros->count()}})</x-section-heading>
                     <div class="grid grid-cols-3 gap-3">
-                        <x-retro.sprint-card :with_logo="true"></x-retro.sprint-card>
-                        <x-retro.sprint-card :with_logo="true"></x-retro.sprint-card>
+                        @foreach($retros as $retro)
+                            <a class="block" href="{{ route('retro.show', $retro->id) }}">
+                                <x-retro.sprint-card :with_logo="true" :retro="$retro" ></x-retro.sprint-card>
+                            </a>
+                        @endforeach
+
                     </div>
                 </section>
 
@@ -53,3 +57,20 @@
         </div>
     </div>
 </x-app-layout>
+
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('dashboard', () => ({
+
+            actions: @json($actions),
+
+            init(){
+
+            },
+
+        }))
+    })
+
+</script>
+

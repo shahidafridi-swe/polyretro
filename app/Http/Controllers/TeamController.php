@@ -50,46 +50,48 @@ class TeamController extends Controller
             'user_id' => $owner_id,
         ]);
 
-        foreach ($emails as $email) {
-            $user = User::where('email', $email)->first();
+        if($emails[0]){
+            foreach ($emails as $email) {
+                $user = User::where('email', $email)->first();
 
-            if (!$user) {
-                $user = User::create([
-                    'name' => Str::before($email, '@'),
-                    'email' => $email,
-                    'password' => Hash::make(Str::random(12)),
-                    'color' => sprintf("#%06X", mt_rand(0, 0xFFFFFF)),
+                if (!$user) {
+                    $user = User::create([
+                        'name' => Str::before($email, '@'),
+                        'email' => $email,
+                        'password' => Hash::make(Str::random(12)),
+                        'color' => sprintf("#%06X", mt_rand(0, 0xFFFFFF)),
+                    ]);
+                }
+                TeamMember::create([
+                    'team_id' => $team->id,
+                    'user_id' => $user->id,
                 ]);
-
-
+                Mail::to($user->email)->send(new TeamConfirmationMail([
+                    'name' => $user->name,
+                    'team_name' => $team->name,
+                ]));
             }
-
-            TeamMember::create([
-                'team_id' => $team->id,
-                'user_id' => $user->id,
-            ]);
-            Mail::to($user->email)->send(new TeamConfirmationMail([
-                'name' => $user->name,
-                'team_name' => $team->name,
-            ]));
         }
-
         return redirect('/');
-
     }
-
 
     public function show(Team $team)
     {
-        $retros = $team->retros;
+        $retros = $team->retros()->with(['actions.assignedUsers'])->get();
+
         $members = $team->members()->with('user')->get();
-        return view('teams.show', compact('team', 'retros', 'members'));
+
+        $actions = $retros->flatMap(function ($retro) {
+            return $retro->actions;
+        });
+        return view('teams.show', compact('team', 'retros', 'members', 'actions'));
     }
+
+
 
     public function searchUsers(Request $request)
     {
         $search = $request->input('query');
-
         $users = User::where('email', 'LIKE', "%{$search}%")
             ->select('id', 'name', 'email')
             ->get();

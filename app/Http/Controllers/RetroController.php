@@ -11,7 +11,8 @@ class RetroController extends Controller
     public function show(Retro $retro)
     {
         $team = $retro->team;
-        return view('retro.show', compact('retro', 'team'));
+        $members = $team->members()->with('user')->get();
+        return view('retro.show', compact('retro', 'team', 'members'));
     }
 
     public function store(Request $request)
@@ -20,16 +21,18 @@ class RetroController extends Controller
             'name' => 'required|string|max:255',
             'team_id' => 'required|exists:teams,id',
         ]);
-
         $retro = Retro::create([
-
             'team_id' => $validated['team_id'],
             'name' => $validated['name'],
         ]);
-
-//        dd($retro);
-
         return redirect()->route('teams.show', $validated['team_id']);
+    }
+
+    public function update(Request $request, $retroId)
+    {
+        $retro = Retro::find($retroId);
+        $retro->status = $request->status;
+        $retro->save();
     }
 
 

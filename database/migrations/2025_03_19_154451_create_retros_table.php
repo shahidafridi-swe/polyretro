@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('team_id')->constrained()->onDelete('cascade');
-            $table->enum('status', ['in_progress', 'complete'])->default('in_progress');
+            $table->enum('status', ['in progress', 'complete'])->default('in progress');
             $table->timestamps();
         });
     }

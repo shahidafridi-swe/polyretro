@@ -27,7 +27,7 @@
 
     <div class="mt-10 flex gap-2">
         @if($with_logo)
-            <x-teams.team-text-logo logo_size="min">bk</x-teams.team-text-logo>
+            <x-teams.team-text-logo logo_size="min">{{ Str::limit($retro->team->name, 2, '') }}</x-teams.team-text-logo>
         @endif
         <div>
             <div class="">

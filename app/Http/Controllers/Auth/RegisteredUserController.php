@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'photo' => [File::types(['png', 'jpg', 'jpeg'])],
+//            'photo' => [File::types(['png', 'jpg', 'jpeg'])],
         ]);
         $color = sprintf("#%06X", mt_rand(0, 0xFFFFFF));
         $photoPath = null;
